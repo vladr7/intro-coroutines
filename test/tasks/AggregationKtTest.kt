@@ -13,8 +13,8 @@ class AggregationKtTest {
             User("Charlie", 3), User("Alice", 5)
         ).aggregate()
         val expected = listOf(
-            User("Alice", 8),
             User("Bob", 10),
+            User("Alice", 8),
             User("Charlie", 3)
         )
         Assert.assertEquals("Wrong result for 'aggregation'", expected, actual)
