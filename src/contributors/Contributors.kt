@@ -74,12 +74,8 @@ interface Contributors: CoroutineScope {
             }
             SUSPEND -> { // Using coroutines
                 launch {
-                    println("VLAD: START")
-                    foo()
                     val users = loadContributorsSuspend(service, req)
-                    println("VLAD: MIDDLE")
                     updateResults(users, startTime)
-                    println("VLAD: END")
                 }.setUpCancellation()
             }
             CONCURRENT -> { // Performing requests concurrently

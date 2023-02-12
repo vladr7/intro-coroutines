@@ -1,9 +1,6 @@
 package tasks
 
 import contributors.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 suspend fun loadContributorsSuspend(service: GitHubService, req: RequestData): List<User> {
     val repos = service
@@ -18,15 +15,3 @@ suspend fun loadContributorsSuspend(service: GitHubService, req: RequestData): L
     }.aggregate()
 }
 
-suspend fun foo() {
-    GlobalScope.launch {
-        while (true) {
-            delay(2000L)
-            println("VLAD: foo")
-        }
-    }
-    while (true) {
-        delay(1000L)
-        println("VLAD: bar")
-    }
-}
