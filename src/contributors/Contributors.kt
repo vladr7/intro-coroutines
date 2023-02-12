@@ -55,8 +55,8 @@ interface Contributors: CoroutineScope {
         val startTime = System.currentTimeMillis()
         when (getSelectedVariant()) {
             BLOCKING -> { // Blocking UI thread
-                val users = loadContributorsBlocking(service, req)
-                updateResults(users, startTime)
+//                val users = loadContributorsBlocking(service, req)
+//                updateResults(users, startTime)
             }
             BACKGROUND -> { // Blocking a background thread
                 loadContributorsBackground(service, req) { users ->
@@ -66,16 +66,20 @@ interface Contributors: CoroutineScope {
                 }
             }
             CALLBACKS -> { // Using callbacks
-                loadContributorsCallbacks(service, req) { users ->
-                    SwingUtilities.invokeLater {
-                        updateResults(users, startTime)
-                    }
-                }
+//                loadContributorsCallbacks(service, req) { users ->
+//                    SwingUtilities.invokeLater {
+//                        updateResults(users, startTime)
+//                    }
+//                }
             }
             SUSPEND -> { // Using coroutines
                 launch {
+                    println("VLAD: START")
+                    foo()
                     val users = loadContributorsSuspend(service, req)
+                    println("VLAD: MIDDLE")
                     updateResults(users, startTime)
+                    println("VLAD: END")
                 }.setUpCancellation()
             }
             CONCURRENT -> { // Performing requests concurrently
